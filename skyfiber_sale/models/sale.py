@@ -52,7 +52,7 @@ class SaleOrderLine(models.Model):
     @api.depends("price_subtotal", "commission_percent")
     def _compute_commission_amount(self):
         for line in self:
-            line.commission_amount = line.price_subtotal * line.commission_percent / 100
+            line.commission_amount = (line.price_subtotal * line.commission_percent) / 100.0
 
     @api.multi
     def _prepare_invoice_line(self, qty):
